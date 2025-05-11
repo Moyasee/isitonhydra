@@ -99,6 +99,11 @@ function SearchContent() {
               />
             </div>
           </div>
+          {/* Warning message */}
+          <div className="flex items-center gap-2 text-sm text-amber-500/80">
+            <AlertTriangle className="w-4 h-4" />
+            <span>Games that share a single word in their title (e.g., "Red Alert" and "Red Dead") may appear as false positive results.</span>
+          </div>
         </div>
 
         {/* Results Section with Loading State */}

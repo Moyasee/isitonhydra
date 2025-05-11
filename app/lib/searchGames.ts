@@ -133,34 +133,39 @@ async function findMatchingDownloads(
   const data = await fetchSourceData(source);
   if (!data?.downloads) return [];
 
-  // Clean the game title once
-  const cleanGameName = game.title.toLowerCase()
-    .replace(/[^\w\s]/g, ' ')
-    .trim();
-
-  // Split into words and filter out short words and common words
-  const gameWords = cleanGameName
-    .split(' ')
-    .filter(word => word.length > 2)
-    .filter(word => !['the', 'and', 'for', 'of'].includes(word));
-
-  // Find exact matches first
-  const matches = data.downloads.filter(download => {
-    const cleanTitle = download.title.toLowerCase()
-      .replace(/[^\w\s]/g, ' ')
+  // Clean and normalize the game title
+  const normalizeTitle = (title: string) => {
+    return title.toLowerCase()
+      .replace(/[^\w\s]/g, '') // Remove all non-word characters
+      .replace(/\s+/g, ' ')    // Normalize whitespace
       .trim();
-    
-    // Try exact match first
-    if (cleanTitle === cleanGameName) return true;
+  };
 
-    // Then try word matching
-    return gameWords.every(word => cleanTitle.includes(word));
+  const normalizedGameTitle = normalizeTitle(game.title);
+
+  // Find exact matches first, then try fuzzy matching
+  const matches = data.downloads.filter(download => {
+    const normalizedDownloadTitle = normalizeTitle(download.title);
+    
+    // Try exact match first (case-insensitive but otherwise exact)
+    if (normalizedDownloadTitle === normalizedGameTitle) {
+      return true;
+    }
+
+    // If no exact match, check if the download title contains the full game title
+    // or vice versa, to handle cases where one title is a substring of the other
+    if (normalizedDownloadTitle.includes(normalizedGameTitle) || 
+        normalizedGameTitle.includes(normalizedDownloadTitle)) {
+      return true;
+    }
+
+    return false;
   });
 
-  // Sort matches by date
-  const sortedMatches = matches.sort((a, b) => 
-    new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime()
-  );
+  // Sort matches by date and only take the most recent one
+  const sortedMatches = matches
+    .sort((a, b) => new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime())
+    .slice(0, 1); // Only take the most recent match
 
   if (sortedMatches.length > 0) {
     const match = sortedMatches[0];
