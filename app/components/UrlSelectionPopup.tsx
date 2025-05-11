@@ -5,37 +5,32 @@ import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 
 interface UrlSelectionPopupProps {
-  isOpen: boolean
-  onClose: () => void
-  options: Array<{
+  source: {
     name: string
     url: string
-    description?: string
-  }>
-  onSelect: (url: string) => void
+    additional_urls: Array<{
+      name: string
+      url: string
+      description?: string
+    }>
+  }
+  onClose: () => void
 }
 
-export default function UrlSelectionPopup({ isOpen, onClose, options, onSelect }: UrlSelectionPopupProps) {
+export default function UrlSelectionPopup({ source, onClose }: UrlSelectionPopupProps) {
   const { t } = useLanguage()
   const [selectedUrl, setSelectedUrl] = useState<string | null>(null)
   const [showCopied, setShowCopied] = useState(false)
-
-  // Reset states when popup closes
-  useEffect(() => {
-    if (!isOpen) {
-      setSelectedUrl(null)
-      setShowCopied(false)
-    }
-  }, [isOpen])
-
-  if (!isOpen) return null
 
   const handleSelect = async (url: string) => {
     try {
       await navigator.clipboard.writeText(url)
       setSelectedUrl(url)
       setShowCopied(true)
-      onSelect(url)
+      setTimeout(() => {
+        setShowCopied(false)
+        onClose()
+      }, 2000)
     } catch (err) {
       console.error('Failed to copy:', err)
     }
@@ -52,7 +47,7 @@ export default function UrlSelectionPopup({ isOpen, onClose, options, onSelect }
       {/* Popup Container */}
       <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md z-50">
         <div 
-          className="bg-zinc-900/95 border border-zinc-800/50 rounded-xl shadow-xl p-6 m-4" 
+          className="bg-[#111111]/95 border border-zinc-800 rounded-2xl shadow-xl shadow-black/20 p-6 m-4" 
           onClick={e => e.stopPropagation()}
         >
           {/* Popup Title */}
@@ -62,15 +57,15 @@ export default function UrlSelectionPopup({ isOpen, onClose, options, onSelect }
 
           {/* Version Options */}
           <div className="space-y-2">
-            {options.map((option) => (
+            {source.additional_urls.map((option) => (
               <button
                 key={option.url}
                 onClick={() => handleSelect(option.url)}
                 className={cn(
-                  "w-full px-4 py-3 rounded-lg text-left transition-all duration-200",
+                  "w-full px-4 py-3 rounded-xl text-left transition-all duration-200",
                   "flex items-center justify-between",
                   selectedUrl === option.url
-                    ? "bg-purple-500/20 text-purple-300"
+                    ? "bg-emerald-500/20 text-emerald-300"
                     : "text-zinc-300 hover:bg-zinc-800/50"
                 )}
               >
@@ -84,8 +79,8 @@ export default function UrlSelectionPopup({ isOpen, onClose, options, onSelect }
                 </div>
 
                 {selectedUrl === option.url && showCopied && (
-                  <span className="text-xs text-green-500 ml-3">
-                    {t('gameResult.copied')}! ✓
+                  <span className="text-xs text-emerald-400 ml-3">
+                    {t('gameResult.copied')} ✓
                   </span>
                 )}
               </button>
@@ -96,7 +91,7 @@ export default function UrlSelectionPopup({ isOpen, onClose, options, onSelect }
           <div className="mt-6 flex justify-end">
             <button
               onClick={onClose}
-              className="px-6 py-2 text-sm bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg transition-colors"
+              className="px-6 py-2 text-sm bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl transition-colors"
             >
               {t('common.close')}
             </button>

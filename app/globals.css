@@ -48,12 +48,7 @@ body {
   content: '';
   position: absolute;
   inset: -1px;
-  background: linear-gradient(
-    90deg,
-    rgba(168, 85, 247, 0.3),
-    rgba(168, 85, 247, 0.1),
-    rgba(168, 85, 247, 0.3)
-  );
+  
   opacity: 0;
   transition: opacity 0.3s ease;
   border-radius: inherit;

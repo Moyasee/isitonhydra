@@ -143,18 +143,7 @@ export const jsonSources = [
     ]
   },
   {
-    name: 'SteamRip(SOFTWARE ONLY)',
-    url: 'https://hydralinks.cloud/sources/steamrip-software.json',
-    additional_urls: [
-      {
-        name: 'Original',
-        url: 'https://hydralinks.cloud/sources/steamrip-software.json'
-      },
-      {
-        name: 'Russian',
-        url: 'https://hydrasources.su/sources/steamrip-software.json',
-        description: 'RUSSIAN ONLY'
-      }
-    ]
+    name: 'Shisuy Source',
+    url: 'https://raw.githubusercontent.com/Shisuiicaro/source/refs/heads/main/shisuyssource.json',
   }
 ]

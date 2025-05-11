@@ -49,19 +49,20 @@ export default function LanguageSwitcher() {
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
           "flex items-center gap-2.5 px-4 py-2.5",
-          "bg-zinc-900/30 backdrop-blur-sm",
-          "border border-zinc-800/30",
-          "rounded-xl",
+          "bg-[#111111]",
+          "border border-zinc-800",
+          "rounded-2xl",
           "text-zinc-400 hover:text-white",
-          "transition-all duration-300",
-          "hover:border-zinc-700/30",
+          "transition-all duration-200",
+          "hover:border-zinc-700",
+          "shadow-lg shadow-black/20",
           "group"
         )}
       >
-        <Flag className="w-5 h-5 rounded-sm shadow-sm opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
+        <Flag className="w-5 h-5 rounded-sm shadow-sm opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
         <ChevronDown className={cn(
           "w-4 h-4 text-zinc-500 group-hover:text-zinc-300",
-          "transition-transform duration-300",
+          "transition-transform duration-200",
           isOpen && "rotate-180"
         )} />
       </button>
@@ -69,10 +70,10 @@ export default function LanguageSwitcher() {
       {isOpen && (
         <div className={cn(
           "absolute mt-2 right-0",
-          "w-52 overflow-hidden rounded-xl",
-          "bg-zinc-900/95 backdrop-blur-sm",
-          "border border-zinc-800/50",
-          "shadow-xl shadow-purple-500/5",
+          "w-52 overflow-hidden rounded-2xl",
+          "bg-[#111111]/95 backdrop-blur-sm",
+          "border border-zinc-800",
+          "shadow-xl shadow-black/20",
           "animate-fade-in"
         )}>
           <div className="p-1">
@@ -86,12 +87,12 @@ export default function LanguageSwitcher() {
                     setIsOpen(false)
                   }}
                   className={cn(
-                    "w-full px-3 py-2.5 rounded-lg",
+                    "w-full px-3 py-2.5 rounded-xl",
                     "text-left text-sm",
                     "flex items-center gap-3",
                     "transition-all duration-200",
                     code === language
-                      ? "bg-purple-500/20 text-purple-300"
+                      ? "bg-emerald-500/20 text-emerald-300"
                       : "text-zinc-400 hover:text-white hover:bg-zinc-800/50"
                   )}
                 >

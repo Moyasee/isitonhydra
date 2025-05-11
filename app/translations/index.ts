@@ -3,6 +3,7 @@ export const translations = {
     title: "Is it on Hydra?",
     subtitle: "Your ultimate game search engine. Fast, reliable, and always up to date.",
     searchPlaceholder: "Search for any game...",
+    discoverBadge: "Search Games in Sources",
     features: {
       fast: {
         title: "Lightning Fast",
@@ -58,6 +59,7 @@ Moyase`
     title: "Está no Hydra?",
     subtitle: "Seu mecanismo de busca definitivo para jogos. Rápido, confiável e sempre atualizado.",
     searchPlaceholder: "Pesquisar qualquer jogo...",
+    discoverBadge: "Procure Jogos nas Fontes",
     features: {
       fast: {
         title: "Super Rápido",
@@ -113,6 +115,7 @@ Moyase`
     title: "Is it on Hydra?",
     subtitle: "Твой универсальный поиск игр. Быстрый, надежный и всегда актуальный.",
     searchPlaceholder: "Поиск любой игры...",
+    discoverBadge: "Ищите Игры в Источниках",
     features: {
       fast: {
         title: "Быстрый",

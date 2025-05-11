@@ -96,13 +96,12 @@ export default function GameResult({ name, image, sources, genres = [] }: GameRe
     <>
       <div className={cn(
         "game-card",
-        "relative overflow-hidden rounded-xl",
-        "bg-zinc-900/30 backdrop-blur-sm",
-        "border border-zinc-800/30",
+        "relative overflow-hidden rounded-2xl",
+        "bg-[#111111]",
+        "border border-zinc-800",
         "transition-all duration-300",
-        "hover:border-zinc-700/50",
-        "hover:shadow-xl hover:shadow-purple-500/5",
-        "animate-card-pulse",
+        "hover:border-emerald-500/20",
+        "shadow-lg shadow-black/20 hover:shadow-emerald-900/20",
         "group"
       )}>
         {/* Background Image */}
@@ -112,7 +111,7 @@ export default function GameResult({ name, image, sources, genres = [] }: GameRe
               src={imageUrl}
               alt={name}
               fill
-              className="object-cover opacity-40 transition-opacity duration-300 group-hover:opacity-50"
+              className="object-cover opacity-20 transition-opacity duration-300 group-hover:opacity-30"
               onError={() => {
                 const nextUrl = tryNextImageFormat(imageUrl);
                 if (nextUrl) {
@@ -126,7 +125,12 @@ export default function GameResult({ name, image, sources, genres = [] }: GameRe
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               priority={false}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/95 via-black/80 to-black/70" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-black/70" />
+            {/* Hover gradient effect */}
+            <div className={cn(
+              "absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100",
+              "bg-gradient-to-t from-emerald-950/30 to-transparent"
+            )} />
           </div>
         )}
 
@@ -134,14 +138,19 @@ export default function GameResult({ name, image, sources, genres = [] }: GameRe
         <div className="relative p-6 space-y-4">
           {/* Title and Genres */}
           <div>
-            <h3 className="text-xl font-medium text-white mb-2">
+            <h3 className="text-xl font-medium text-white mb-3 group-hover:text-emerald-50 transition-colors duration-300">
               {name}
             </h3>
             <div className="flex flex-wrap gap-2">
               {genres.map((genre, index) => (
                 <span
                   key={index}
-                  className="px-2.5 py-1 text-xs rounded-md bg-zinc-800/50 text-zinc-400"
+                  className={cn(
+                    "px-2.5 py-1 text-xs rounded-lg",
+                    "bg-zinc-800/50 text-zinc-400",
+                    "group-hover:bg-emerald-900/20 group-hover:text-emerald-300",
+                    "transition-all duration-300"
+                  )}
                 >
                   {genre}
                 </span>
@@ -150,7 +159,7 @@ export default function GameResult({ name, image, sources, genres = [] }: GameRe
           </div>
 
           {/* Sources List */}
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             {sources.map((source, index) => {
               const hasAdditionalUrls = source.additional_urls && source.additional_urls.length > 0;
               const sourceUrl = getSourceUrl(source.name);
@@ -159,18 +168,26 @@ export default function GameResult({ name, image, sources, genres = [] }: GameRe
                 <div
                   key={index}
                   className={cn(
-                    "flex items-center gap-3 px-5 py-3 transition-all duration-200 group/item",
-                    "hover:bg-gradient-to-r hover:from-white/[0.03] hover:to-transparent"
+                    "flex items-center gap-3 px-3 sm:px-5 py-3",
+                    "transition-all duration-200 group/item rounded-xl",
+                    "hover:bg-emerald-900/10"
                   )}
                 >
-                  <div className="flex-1 min-w-0 flex items-center gap-6">
-                    <span className="text-white/90 font-medium truncate min-w-[160px] text-sm">
+                  <div className="flex-1 min-w-0 flex items-center gap-2 sm:gap-6">
+                    <span className="text-white/90 font-medium truncate min-w-[100px] sm:w-[180px] text-sm group-hover/item:text-emerald-50">
                       {source.name}
                     </span>
 
-                    <div className="hidden sm:flex items-center gap-1.5 text-zinc-500 text-xs">
-                      <Calendar className="w-3.5 h-3.5" />
-                      <span className="tabular-nums">
+                    <div className="hidden sm:flex items-center gap-1.5 text-zinc-500 text-xs group-hover/item:text-emerald-500/70 w-[120px]">
+                      <Calendar className="w-3.5 h-3.5 flex-shrink-0" />
+                      <span className="tabular-nums whitespace-nowrap">
+                        {formatDate(source.uploadDate, language)}
+                      </span>
+                    </div>
+                    
+                    {/* Mobile date display */}
+                    <div className="flex sm:hidden items-center text-zinc-500 text-xs group-hover/item:text-emerald-500/70">
+                      <span className="tabular-nums whitespace-nowrap text-[10px]">
                         {formatDate(source.uploadDate, language)}
                       </span>
                     </div>
@@ -183,9 +200,12 @@ export default function GameResult({ name, image, sources, genres = [] }: GameRe
                         setShowUrlPopup(true);
                       }}
                       className={cn(
-                        "flex items-center gap-1.5 px-2 py-1 rounded-lg",
-                        "bg-zinc-800/50 text-zinc-400 opacity-0 group-hover/item:opacity-100",
-                        "hover:bg-purple-500/20 hover:text-purple-300 transition-all duration-200 text-xs font-medium"
+                        "flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg",
+                        "bg-zinc-800/50 text-zinc-400",
+                        "opacity-0 group-hover/item:opacity-100",
+                        "hover:bg-emerald-500/20 hover:text-emerald-300",
+                        "transition-all duration-200",
+                        "text-xs font-medium"
                       )}
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
@@ -200,19 +220,22 @@ export default function GameResult({ name, image, sources, genres = [] }: GameRe
                           setTimeout(() => setCopiedIndex(null), 2000);
                         }}
                         className={cn(
-                          "flex items-center gap-1.5 px-2 py-1 rounded-lg",
-                          "bg-zinc-800/50 text-zinc-400 opacity-0 group-hover/item:opacity-100",
-                          "hover:text-white transition-all duration-200 text-xs font-medium"
+                          "flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium",
+                          "transition-all duration-200",
+                          copiedIndex === index
+                            ? "bg-emerald-500/20 text-emerald-300"
+                            : cn(
+                                "bg-zinc-800/50 text-zinc-400",
+                                "opacity-0 group-hover/item:opacity-100",
+                                "hover:bg-emerald-500/20 hover:text-emerald-300"
+                              )
                         )}
                       >
                         <Copy className="w-3.5 h-3.5" />
-                        <span>{t('gameResult.copy')}</span>
-                      </button>
-                      {copiedIndex === index && (
-                        <span className="absolute -top-8 right-0 px-2 py-1 bg-green-500/90 text-xs rounded-md text-white whitespace-nowrap animate-fade-in">
-                          {t('gameResult.copied')}
+                        <span>
+                          {copiedIndex === index ? t('gameResult.copied') : t('gameResult.copy')}
                         </span>
-                      )}
+                      </button>
                     </div>
                   )}
                 </div>
@@ -222,21 +245,20 @@ export default function GameResult({ name, image, sources, genres = [] }: GameRe
         </div>
       </div>
 
-      <UrlSelectionPopup
-        isOpen={showUrlPopup}
-        onClose={() => setShowUrlPopup(false)}
-        options={selectedSource?.additional_urls || []}
-        onSelect={(url) => {
-          navigator.clipboard.writeText(url);
-          if (selectedSource) {
-            setCopiedIndex(sources.findIndex(s => s.name === selectedSource.name));
-            setTimeout(() => {
-              setCopiedIndex(null);
-              setShowUrlPopup(false);
-            }, 2000);
-          }
-        }}
-      />
+      {/* URL Selection Popup */}
+      {showUrlPopup && selectedSource && selectedSource.additional_urls && (
+        <UrlSelectionPopup
+          source={{
+            name: selectedSource.name,
+            url: selectedSource.url,
+            additional_urls: selectedSource.additional_urls
+          }}
+          onClose={() => {
+            setShowUrlPopup(false);
+            setSelectedSource(null);
+          }}
+        />
+      )}
     </>
   );
 } 
