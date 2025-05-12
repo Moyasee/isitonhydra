@@ -76,7 +76,7 @@ export default function SourceFilter({ selectedSources, onChange, isMainPage }: 
           "transform opacity-100 scale-100",
           "transition-all duration-200",
           isMainPage ? "-right-2" : "-right-2",
-          "w-72",
+          "w-72 max-w-[calc(100vw-2rem)]",
           "animate-fade-in"
         )}>
           <div className="p-3">
@@ -108,7 +108,8 @@ export default function SourceFilter({ selectedSources, onChange, isMainPage }: 
             </div>
             <div 
               className={cn(
-                "max-h-[280px] overflow-y-auto pr-1 space-y-1",
+                "overflow-y-auto pr-1 space-y-1",
+                "max-h-[140px] sm:max-h-[190px] md:max-h-[280px]",
                 "[&::-webkit-scrollbar]:w-1.5",
                 "[&::-webkit-scrollbar-track]:bg-transparent",
                 "[&::-webkit-scrollbar-thumb]:bg-white/10",
