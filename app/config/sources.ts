@@ -1,11 +1,11 @@
 export const jsonSources = [
   {
     name: 'Empress',
-    url: 'https://hydralinks.cloud/sources/empress.json',
+    url: 'https://hydralinks.pages.dev/sources/empress.json',
     additional_urls: [
       {
         name: 'Original',
-        url: 'https://hydralinks.cloud/sources/empress.json'
+        url: 'https://hydralinks.pages.dev/sources/empress.json'
       },
       {
         name: 'Russian',
@@ -16,11 +16,11 @@ export const jsonSources = [
   },
   {
     name: 'FitGirl',
-    url: 'https://hydralinks.cloud/sources/fitgirl.json',
+    url: 'https://hydralinks.pages.dev/sources/fitgirl.json',
     additional_urls: [
       {
         name: 'Original',
-        url: 'https://hydralinks.cloud/sources/fitgirl.json'
+        url: 'https://hydralinks.pages.dev/sources/fitgirl.json'
       },
       {
         name: 'Russian',
@@ -31,11 +31,11 @@ export const jsonSources = [
   },
   {
     name: 'Atop Games',
-    url: 'https://hydralinks.cloud/sources/atop-games.json',
+    url: 'https://hydralinks.pages.dev/sources/atop-games.json',
     additional_urls: [
       {
         name: 'Original',
-        url: 'https://hydralinks.cloud/sources/atop-games.json'
+        url: 'https://hydralinks.pages.dev/sources/atop-games.json'
       },
       {
         name: 'Russian',
@@ -46,11 +46,11 @@ export const jsonSources = [
   },
   {
     name: 'Dodi',
-    url: 'https://hydralinks.cloud/sources/dodi.json',
+    url: 'https://hydralinks.pages.dev/sources/dodi.json',
     additional_urls: [
       {
         name: 'Original',
-        url: 'https://hydralinks.cloud/sources/dodi.json'
+        url: 'https://hydralinks.pages.dev/sources/dodi.json'
       },
       {
         name: 'Russian',
@@ -61,11 +61,11 @@ export const jsonSources = [
   },
   {
     name: 'GOG',
-    url: 'https://hydralinks.cloud/sources/gog.json',
+    url: 'https://hydralinks.pages.dev/sources/gog.json',
     additional_urls: [
       {
         name: 'Original',
-        url: 'https://hydralinks.cloud/sources/gog.json'
+        url: 'https://hydralinks.pages.dev/sources/gog.json'
       },
       {
         name: 'Russian',
@@ -76,11 +76,11 @@ export const jsonSources = [
   },
   {
     name: 'KaosKrew',
-    url: 'https://hydralinks.cloud/sources/kaoskrew.json',
+    url: 'https://hydralinks.pages.dev/sources/kaoskrew.json',
     additional_urls: [
       {
         name: 'Original',
-        url: 'https://hydralinks.cloud/sources/kaoskrew.json'
+        url: 'https://hydralinks.pages.dev/sources/kaoskrew.json'
       },
       {
         name: 'Russian',
@@ -91,11 +91,11 @@ export const jsonSources = [
   },
   {
     name: 'onlinefix',
-    url: 'https://hydralinks.cloud/sources/onlinefix.json',
+    url: 'https://hydralinks.pages.dev/sources/onlinefix.json',
     additional_urls: [
       {
         name: 'Original',
-        url: 'https://hydralinks.cloud/sources/onlinefix.json'
+        url: 'https://hydralinks.pages.dev/sources/onlinefix.json'
       },
       {
         name: 'Russian',
@@ -106,11 +106,11 @@ export const jsonSources = [
   },
   {
     name: 'Xatab',
-    url: 'https://hydralinks.cloud/sources/xatab.json',
+    url: 'https://hydralinks.pages.dev/sources/xatab.json',
     additional_urls: [
       {
         name: 'Original',
-        url: 'https://hydralinks.cloud/sources/xatab.json'
+        url: 'https://hydralinks.pages.dev/sources/xatab.json'
       },
       {
         name: 'Russian',
@@ -129,11 +129,11 @@ export const jsonSources = [
   },
   {
     name: 'SteamRip(Direct download)',
-    url: 'https://hydralinks.cloud/sources/steamrip.json',
+    url: 'https://hydralinks.pages.dev/sources/steamrip.json',
     additional_urls: [
       {
         name: 'Original',
-        url: 'https://hydralinks.cloud/sources/steamrip.json'
+        url: 'https://hydralinks.pages.dev/sources/steamrip.json'
       },
       {
         name: 'Russian',
