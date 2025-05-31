@@ -44,14 +44,6 @@ const MIN_QUERY_LENGTH = 3;
 const MAX_RESULTS = 5;
 
 // New function to fetch games from Hydra API
-function getHydraApiUrl() {
-  // Use the full URL in production, relative URL in development
-  if (process.env.NODE_ENV === 'production') {
-    return 'https://hydra-api-us-east-1.losbroxas.org/catalogue/search';
-  }
-  return '/api/hydra/search';
-}
-
 async function fetchGamesFromApi(query: string): Promise<HydraApiGame[]> {
   // Check cache first
   const cacheKey = query.toLowerCase();
@@ -66,11 +58,9 @@ async function fetchGamesFromApi(query: string): Promise<HydraApiGame[]> {
       take: MAX_RESULTS,
       skip: 0
     };
-    
-    const apiUrl = getHydraApiUrl();
-    console.log('Sending request to API:', { url: apiUrl, ...requestBody });
+    console.log('Sending request to API:', requestBody);
 
-    const response = await fetch(apiUrl, {
+    const response = await fetch('/api/hydra/search', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
