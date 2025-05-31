@@ -51,7 +51,7 @@ async function fetchSourceData(source: { name: string; url: string }) {
 }
 
 // Search for games in a source
-function searchInSource(downloads: any[], query: string) {
+function searchInSource(downloads: any[], query: string, sourceUrl: string) {
   const queryLower = query.toLowerCase();
   return downloads
     .filter(download => 
@@ -59,9 +59,10 @@ function searchInSource(downloads: any[], query: string) {
     )
     .map(download => ({
       title: download.title,
-      url: download.uris[0],
+      url: sourceUrl, // Return the source URL instead of magnet link
       uploadDate: download.uploadDate,
-      fileSize: download.fileSize
+      fileSize: download.fileSize,
+      sourceUrl: sourceUrl // Keep the source URL in a separate field for clarity
     }));
 }
 
@@ -111,7 +112,7 @@ export async function POST(request: Request) {
     for (const source of jsonSources) {
       try {
         const sourceData = await fetchSourceData(source);
-        const matches = searchInSource(sourceData.downloads || [], sanitizedQuery);
+        const matches = searchInSource(sourceData.downloads || [], sanitizedQuery, source.url);
         
         if (matches.length > 0) {
           results.push({
